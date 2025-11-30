@@ -85,23 +85,28 @@ struct Settings: View {
                                     .foregroundStyle(.white)
                                     .opacity(0.07)
                                 
-                                HStack{
-                                    Image(systemName: "calendar")
-                                        .foregroundStyle(.white)
+                                NavigationLink {
                                     
-                                    Text("Memories")
-                                        .foregroundStyle(.white)
-                                        .fontWeight(.semibold)
-                                    
-                                    Spacer()
-                                    
-                                    Image(systemName: "chevron.right")
-                                        .foregroundStyle(.gray)
-                                        .font(.system(size: 14))
-                                    
+                                } label: {
+                                    HStack{
+                                        Image(systemName: "calendar")
+                                            .foregroundStyle(.white)
+                                        
+                                        Text("Memories")
+                                            .foregroundStyle(.white)
+                                            .fontWeight(.semibold)
+                                        
+                                        Spacer()
+                                        
+                                        Image(systemName: "chevron.right")
+                                            .foregroundStyle(.gray)
+                                            .font(.system(size: 14))
+                                        
+                                    }
+                                    .padding(.horizontal, width * 0.1)
+                                    .frame(height: 30)
                                 }
-                                .padding(.horizontal, width * 0.1)
-                                .frame(height: 30)
+
                             }
                         }
                         .padding(.top, 12)
