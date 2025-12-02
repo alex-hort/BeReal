@@ -13,6 +13,8 @@ struct EditProfile: View {
     @State private var bio = ""
     @State private var location = ""
     
+    
+    
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
@@ -57,11 +59,14 @@ struct EditProfile: View {
 
 // MARK: - Header
 struct HeaderView: View {
+    @Environment(\.dismiss) var dismiss
     var body: some View {
         VStack(spacing: 0) {
             ZStack {
                 HStack {
-                    Button("Cancel") {}
+                    Button("Cancel") {
+                        dismiss()
+                    }
                         .foregroundStyle(.white)
                     
                     Spacer()

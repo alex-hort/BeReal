@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OtherView: View {
-    
+    @Environment(\.dismiss) var dismiss
     @State var fastCamera = false
     var body: some View {
         ZStack {
@@ -22,9 +22,13 @@ struct OtherView: View {
                         .fontWeight(.semibold)
 
                     HStack {
-                        Image(systemName: "arrow.backward")
-                            .foregroundStyle(.white)
-                            .font(.system(size: 20))
+                        Button{
+                            dismiss()
+                        }label: {
+                            Image(systemName: "arrow.backward")
+                                .foregroundStyle(.white)
+                                .font(.system(size: 20))
+                        }
                         Spacer()
                     }
                 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TimeZoneView: View {
-    
+    @Environment(\.dismiss) var dismiss
     @State var area = "americas"
     
     var body: some View {
@@ -24,9 +24,13 @@ struct TimeZoneView: View {
                             .fontWeight(.semibold)
                         
                         HStack{
-                            Image(systemName: "arrow.backward")
-                                .foregroundStyle(.white)
-                                .font(.system(size: 20))
+                            Button{
+                                dismiss()
+                            }label: {
+                                Image(systemName: "arrow.backward")
+                                    .foregroundStyle(.white)
+                                    .font(.system(size: 20))
+                            }
                             
                             
                             Spacer()
