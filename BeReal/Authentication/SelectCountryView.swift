@@ -9,7 +9,7 @@ import SwiftUI
 import CountryPicker
 
 struct SelectCountryView: View {
-    @Binding var countryChosen: Country?
+    @Binding var countryChosen: Country
     @State private var searchText = ""
     @Environment(\.dismiss) var dismiss
     
@@ -62,7 +62,7 @@ struct SelectCountryView: View {
                                     
                                     Spacer()
                                     
-                                    if country.isoCode == countryChosen?.isoCode {
+                                    if country.isoCode == countryChosen.isoCode {
                                         Image(systemName: "checkmark.circle")
                                             .foregroundColor(.blue)
                                     }
@@ -93,6 +93,3 @@ struct SelectCountryView: View {
     }
 }
 
-#Preview {
-    SelectCountryView(countryChosen: .constant(nil))
-}
