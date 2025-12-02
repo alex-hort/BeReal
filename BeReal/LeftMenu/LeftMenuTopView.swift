@@ -12,6 +12,8 @@ struct LeftMenuTopView: View {
     @State var text = ""
     @State var isEditing = false
     
+    @Binding var mainMenu: String
+    
     var body: some View {
         VStack{
             
@@ -20,8 +22,14 @@ struct LeftMenuTopView: View {
                     
                     Spacer()
                     
-                    Image(systemName: "arrow.forward")
-                        .foregroundStyle(.white)
+                    Button{
+                        withAnimation {
+                            self.mainMenu = "feed"
+                        }
+                    }label: {
+                        Image(systemName: "arrow.forward")
+                            .foregroundStyle(.white)
+                    }
                 }
                 
                 Text("BeReal.")
@@ -37,5 +45,5 @@ struct LeftMenuTopView: View {
 }
 
 #Preview {
-    LeftMenuTopView()
+    LeftMenuTopView(mainMenu: .constant("left"))
 }

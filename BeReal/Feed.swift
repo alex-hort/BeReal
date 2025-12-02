@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct Feed: View {
+    
+    @Binding var mainMenu: String
+    
     var body: some View {
         ZStack{
             ///background complete black
@@ -69,8 +72,16 @@ struct Feed: View {
                 VStack{
                     VStack{
                         HStack{
-                            Image(systemName: "person.2.fill")
-                                .foregroundStyle(.white)
+                            
+                            Button{
+                                withAnimation {
+                                    self.mainMenu = "left"
+                                }
+                               
+                            }label: {
+                                Image(systemName: "person.2.fill")
+                                    .foregroundStyle(.white)
+                            }
                             
                             Spacer()
                             
@@ -81,10 +92,16 @@ struct Feed: View {
                             
                             Spacer()
                             //profile image
-                            Image("me")
-                                .resizable()
-                                .frame(width: 35, height: 35)
-                                .clipShape(Circle())
+                            Button{
+                                withAnimation {
+                                    self.mainMenu = "profile"
+                                }
+                            }label: {
+                                Image("me")
+                                    .resizable()
+                                    .frame(width: 35, height: 35)
+                                    .clipShape(Circle())
+                            }
                         }
                         .padding(.horizontal)
                         
@@ -105,5 +122,5 @@ struct Feed: View {
 }
 
 #Preview {
-    Feed()
+    Feed(mainMenu: .constant("feed"))
 }

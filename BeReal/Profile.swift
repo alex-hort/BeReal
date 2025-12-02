@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct Profile: View {
+    @Binding var mainMenu: String
+    
     var body: some View {
         
         VStack{
@@ -16,9 +18,17 @@ struct Profile: View {
                 
                 VStack{
                     HStack{
-                        Image(systemName: "arrow.backward")
-                            .foregroundStyle(.white)
-                            .font(.system(size: 20))
+                        Button{
+                            withAnimation {
+                                self.mainMenu = "feed"
+                            }
+
+                           
+                        }label: {
+                            Image(systemName: "arrow.backward")
+                                .foregroundStyle(.white)
+                                .font(.system(size: 20))
+                        }
                         
                         Spacer()
                         
@@ -136,5 +146,5 @@ struct Profile: View {
 }
 
 #Preview {
-    Profile()
+    Profile(mainMenu: .constant("profile"))
 }

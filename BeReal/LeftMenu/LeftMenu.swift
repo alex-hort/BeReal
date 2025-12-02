@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct LeftMenu: View {
+    
+    
+    
     @State var widh = UIScreen.main.bounds.width
     @State var menu = "suggestions"
     
+    @Binding var mainMenu: String
     
     var body: some View {
 
@@ -18,7 +22,7 @@ struct LeftMenu: View {
             ZStack{
                 Color.black.ignoresSafeArea()
                 
-                LeftMenuTopView()
+                LeftMenuTopView(mainMenu: $mainMenu)
                 
                 if menu == "suggestions" {
                     Suggestions()
@@ -100,5 +104,5 @@ struct LeftMenu: View {
 }
 
 #Preview {
-    LeftMenu()
+    LeftMenu(mainMenu: .constant("left"))
 }
