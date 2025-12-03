@@ -17,6 +17,8 @@ struct EnterPhoneNumberView: View {
     
     @Binding var phoneNumeberButtonClicked: Bool
     
+    @EnvironmentObject var aVM: AuthenticationVM
+    
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
@@ -99,7 +101,7 @@ struct EnterPhoneNumberView: View {
                         .padding(.horizontal)
                     
                     Button{
-                        
+                        aVM.sendfOtp()
                         
                     }label: {
                         WhiteButtonView(buttonActive: $buttonActive, text: "Continue")
@@ -122,7 +124,20 @@ struct EnterPhoneNumberView: View {
         }
         .sheet(isPresented: $showCountryList) {
             SelectCountryView(countryChosen: $country)
-        }.environment(\.colorScheme, .dark)
+        }
+//        .overlay(content: {
+//            ProgressView()
+//        })
+        
+        .background{
+            NavigationLink(tag: "VERIFICATION", selection: $aVM.navigationTag){
+                EnterCodeView().environmentObject(aVM)
+            }label:{
+               
+            }
+            .labelsHidden()
+        }
+        .environment(\.colorScheme, .dark)
     }
 }
 

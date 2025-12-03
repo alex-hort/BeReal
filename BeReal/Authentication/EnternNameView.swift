@@ -11,6 +11,7 @@ struct EnternNameView: View {
     
     @State var name = ""
     @State var buttonActive = false
+    @EnvironmentObject var aVM: AuthenticationVM
     
     @Binding var nameButtonClicked: Bool
     var body: some View {
@@ -62,6 +63,9 @@ struct EnternNameView: View {
                     Spacer()
                     
                     Button{
+                        if buttonActive{
+                            nameButtonClicked = true
+                        }
                     
                     }label: {
                         WhiteButtonView(buttonActive: $buttonActive , text: "Continue")

@@ -16,6 +16,7 @@ struct EnterAgeView: View {
     
     @Binding var ageButtonClicked: Bool
    
+    @EnvironmentObject var aVM: AuthenticationVM
     
     var body: some View {
         VStack {
@@ -117,7 +118,9 @@ struct EnterAgeView: View {
                     }
                     
                     Button{
-                        
+                        if buttonActive{
+                            ageButtonClicked = true
+                        }
                     }label: {
                         WhiteButtonView(buttonActive: $ageButtonClicked, text: "Continue")
                             .padding(.bottom, 50)
