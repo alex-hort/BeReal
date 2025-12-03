@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EnternNameView: View {
     
-    @State var name = ""
+    @Binding var name: String
     @State var buttonActive = false
     @EnvironmentObject var aVM: AuthenticationVM
     

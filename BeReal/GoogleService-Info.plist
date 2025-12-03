@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CLIENT_ID</key>
+    <string>280924386770-r96enrl1usscughl6jpl0qdadf6c4opr.apps.googleusercontent.com</string>
+    <key>REVERSED_CLIENT_ID</key>
+    <string>com.googleusercontent.apps.280924386770-r96enrl1usscughl6jpl0qdadf6c4opr</string>
+    <key>API_KEY</key>
+    <string>AIzaSyDoSobMTU8bNDbr1MmQU_2VLcaJsf4rr7o</string>
+    <key>GCM_SENDER_ID</key>
+    <string>280924386770</string>
+    <key>PLIST_VERSION</key>
+    <string>1</string>
+    <key>BUNDLE_ID</key>
+    <string>alexhort.BeReal</string>
+    <key>PROJECT_ID</key>
+    <string>bereal-e3852</string>
+    <key>STORAGE_BUCKET</key>
+    <string>bereal-e3852.firebasestorage.app</string>
+    <key>IS_ADS_ENABLED</key>
+    <false></false>
+    <key>IS_ANALYTICS_ENABLED</key>
+    <false></false>
+    <key>IS_APPINVITE_ENABLED</key>
+    <true></true>
+    <key>IS_GCM_ENABLED</key>
+    <true></true>
+    <key>IS_SIGNIN_ENABLED</key>
+    <true></true>
+    <key>GOOGLE_APP_ID</key>
+    <string>1:280924386770:ios:0c8d11ea5054caf138440b</string>
+</dict>
+</plist>

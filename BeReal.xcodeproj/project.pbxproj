@@ -8,15 +8,35 @@
 
 /* Begin PBXBuildFile section */
 		011F30982EDF79F6000DF2A8 /* CountryPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 011F30972EDF79F6000DF2A8 /* CountryPicker */; };
+		01B4498D2EE0AD5D00A6887A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 01B4498C2EE0AD5D00A6887A /* FirebaseAuth */; };
+		01B4498F2EE0AD5D00A6887A /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 01B4498E2EE0AD5D00A6887A /* FirebaseDatabase */; };
+		01B449912EE0AD5D00A6887A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 01B449902EE0AD5D00A6887A /* FirebaseFirestore */; };
+		01B449932EE0AD5D00A6887A /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 01B449922EE0AD5D00A6887A /* FirebaseFunctions */; };
+		01B449952EE0AD5D00A6887A /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 01B449942EE0AD5D00A6887A /* FirebaseStorage */; };
+		01B449972EE0AD5D00A6887A /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 01B449962EE0AD5D00A6887A /* FirebaseStorageCombine-Community */; };
+		01B449992EE0B4CA00A6887A /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 01B449982EE0B4CA00A6887A /* FirebaseCore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		01CE327E2EDA6DAE00219B49 /* BeReal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeReal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		01B449A12EE0BCBF00A6887A /* Exceptions for "BeReal" folder in "BeReal" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 01CE327D2EDA6DAE00219B49 /* BeReal */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		01CE32802EDA6DAE00219B49 /* BeReal */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				01B449A12EE0BCBF00A6887A /* Exceptions for "BeReal" folder in "BeReal" target */,
+			);
 			path = BeReal;
 			sourceTree = "<group>";
 		};
@@ -27,7 +47,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01B4498F2EE0AD5D00A6887A /* FirebaseDatabase in Frameworks */,
+				01B449972EE0AD5D00A6887A /* FirebaseStorageCombine-Community in Frameworks */,
+				01B449912EE0AD5D00A6887A /* FirebaseFirestore in Frameworks */,
+				01B449932EE0AD5D00A6887A /* FirebaseFunctions in Frameworks */,
 				011F30982EDF79F6000DF2A8 /* CountryPicker in Frameworks */,
+				01B4498D2EE0AD5D00A6887A /* FirebaseAuth in Frameworks */,
+				01B449992EE0B4CA00A6887A /* FirebaseCore in Frameworks */,
+				01B449952EE0AD5D00A6887A /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +98,13 @@
 			name = BeReal;
 			packageProductDependencies = (
 				011F30972EDF79F6000DF2A8 /* CountryPicker */,
+				01B4498C2EE0AD5D00A6887A /* FirebaseAuth */,
+				01B4498E2EE0AD5D00A6887A /* FirebaseDatabase */,
+				01B449902EE0AD5D00A6887A /* FirebaseFirestore */,
+				01B449922EE0AD5D00A6887A /* FirebaseFunctions */,
+				01B449942EE0AD5D00A6887A /* FirebaseStorage */,
+				01B449962EE0AD5D00A6887A /* FirebaseStorageCombine-Community */,
+				01B449982EE0B4CA00A6887A /* FirebaseCore */,
 			);
 			productName = BeReal;
 			productReference = 01CE327E2EDA6DAE00219B49 /* BeReal.app */;
@@ -102,6 +136,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				011F30962EDF79F6000DF2A8 /* XCRemoteSwiftPackageReference "CountryPicker" */,
+				01B4498B2EE0AD5D00A6887A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 01CE327F2EDA6DAE00219B49 /* Products */;
@@ -265,6 +300,7 @@
 				DEVELOPMENT_TEAM = PS2DYKK3TY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BeReal/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -293,6 +329,7 @@
 				DEVELOPMENT_TEAM = PS2DYKK3TY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BeReal/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -343,6 +380,14 @@
 				minimumVersion = 2.0.3;
 			};
 		};
+		01B4498B2EE0AD5D00A6887A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.6.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -350,6 +395,41 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 011F30962EDF79F6000DF2A8 /* XCRemoteSwiftPackageReference "CountryPicker" */;
 			productName = CountryPicker;
+		};
+		01B4498C2EE0AD5D00A6887A /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01B4498B2EE0AD5D00A6887A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		01B4498E2EE0AD5D00A6887A /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01B4498B2EE0AD5D00A6887A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		01B449902EE0AD5D00A6887A /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01B4498B2EE0AD5D00A6887A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		01B449922EE0AD5D00A6887A /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01B4498B2EE0AD5D00A6887A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
+		01B449942EE0AD5D00A6887A /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01B4498B2EE0AD5D00A6887A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		01B449962EE0AD5D00A6887A /* FirebaseStorageCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01B4498B2EE0AD5D00A6887A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseStorageCombine-Community";
+		};
+		01B449982EE0B4CA00A6887A /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01B4498B2EE0AD5D00A6887A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

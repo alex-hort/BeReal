@@ -10,9 +10,7 @@ import CountryPicker
 
 struct EnterPhoneNumberView: View {
     
-    @State var country = Country(isoCode: "MX")
     @State var showCountryList = false
-    @State var phoneNumber = ""
     @State var buttonActive = false
     
     @Binding var phoneNumeberButtonClicked: Bool
@@ -43,8 +41,8 @@ struct EnterPhoneNumberView: View {
               
                     HStack(spacing: 10) {
                         HStack {
-                            Text(country.isoCode.getFlag())
-                            Text("+\(country.phoneCode)")
+                            Text(aVM.country.isoCode.getFlag())
+                            Text("+\(aVM.country.phoneCode)")
                                 .foregroundStyle(.white)
                                 .font(.system(size: 16, weight: .bold))
                         }
@@ -64,19 +62,19 @@ struct EnterPhoneNumberView: View {
                         Spacer()
                      
                         TextField("Your Phone",
-                                  text: $phoneNumber)
+                                  text: $aVM.phoneNumber)
                         .keyboardType(.numberPad)
                         .foregroundStyle(.white)
                         .font(.system(size: 40, weight: .heavy))
-                        .onChange(of: phoneNumber) {
+                        .onChange(of: aVM.phoneNumber) {
                             // 1. Eliminar todo lo que NO sea número
-                            let filtered = phoneNumber.filter { $0.isNumber }
+                            let filtered = aVM.phoneNumber.filter { $0.isNumber }
 
                             // 2. Limitar a 10 dígitos
                             if filtered.count > 10 {
-                                phoneNumber = String(filtered.prefix(10))
+                                aVM.phoneNumber = String(filtered.prefix(10))
                             } else {
-                                phoneNumber = filtered
+                                aVM.phoneNumber = filtered
                             }
                         }
 
@@ -101,33 +99,36 @@ struct EnterPhoneNumberView: View {
                         .padding(.horizontal)
                     
                     Button{
-                        aVM.sendfOtp()
+                        Task{
+                            await aVM.sendfOtp()
+                        }
                         
                     }label: {
                         WhiteButtonView(buttonActive: $buttonActive, text: "Continue")
-                            .onChange(of: phoneNumber) {
-                                if !phoneNumber.isEmpty{
+                            .onChange(of: aVM.phoneNumber) {
+                                if !aVM.phoneNumber.isEmpty{
                                     buttonActive = true
                                 }
-                                else if phoneNumber.isEmpty{
+                                else if aVM.phoneNumber.isEmpty{
                                     buttonActive = false
                                 }
                             }
                     }
                     .padding(.bottom, 50)
                     
-                    .disabled(phoneNumber.isEmpty ? true: false)
+                    .disabled(aVM.phoneNumber.isEmpty ? true: false)
                 }
             }
             
          
         }
         .sheet(isPresented: $showCountryList) {
-            SelectCountryView(countryChosen: $country)
+            SelectCountryView(countryChosen: $aVM.country)
         }
-//        .overlay(content: {
-//            ProgressView()
-//        })
+        .overlay(content: {
+            ProgressView()
+                .opacity(aVM.isLoading ? 1 : 0)
+        })
         
         .background{
             NavigationLink(tag: "VERIFICATION", selection: $aVM.navigationTag){

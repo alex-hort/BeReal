@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 struct EnterCodeView: View {
-    @State var otpCode = ""
+
     @State var buttonActive = false
     
     @State var timeRemaining = 60
@@ -44,18 +44,18 @@ struct EnterCodeView: View {
                                 .font(.system(size: 16))
                             
                             Text(".....")
-                                .foregroundStyle(otpCode.isEmpty ? .gray : .black)
+                                .foregroundStyle(aVM.otpText.isEmpty ? .gray : .black)
                                 .opacity(0.8)
                                 .font(.system(size: 70))
                                 .padding(.top, -40)
                                 .overlay {
                                     
-                                    TextField("", text: $otpCode)
+                                    TextField("", text: $aVM.otpText)
                                         .foregroundStyle(.white)
                                         .multilineTextAlignment(.center)
                                         .font(.system(size: 24, weight: .heavy))
                                         .keyboardType(.numberPad)
-                                        .onReceive(Just(otpCode)) { newValue in
+                                        .onReceive(Just(aVM.otpText)) { newValue in
                                             
                                             // Filtrar solo números
                                             let digitsOnly = newValue.filter { "0123456789".contains($0) }
@@ -65,7 +65,7 @@ struct EnterCodeView: View {
                                             
                                             // Actualizar si cambió
                                             if limited != newValue {
-                                                otpCode = limited
+                                                aVM.otpText = limited
                                             }
                                         }
                                 }
@@ -82,16 +82,20 @@ struct EnterCodeView: View {
                             .fontWeight(.bold)
                         
                         Button {
-                            
+                            if buttonActive{
+                                Task{
+                                    await aVM.verifyOtp()
+                                }
+                            }
                         } label: {
                             WhiteButtonView(
                                 buttonActive: $buttonActive,
-                                text: otpCode.count == 6 ? "Continue" : "Resend in \(timeRemaining)s"
+                                text: aVM.otpText.count == 6 ? "Continue" : "Resend in \(timeRemaining)s"
                             )
                         }
                         .disabled(!buttonActive)
-                        .onChange(of: otpCode) { _, _ in
-                            buttonActive = otpCode.count == 6
+                        .onChange(of: aVM.otpText) { _, _ in
+                            buttonActive = aVM.otpText.count == 6
                         }
                     }
                     .padding(.bottom, 50)
@@ -101,7 +105,7 @@ struct EnterCodeView: View {
                 if timeRemaining > 0 {
                     timeRemaining -= 1
                 } else {
-                    buttonActive = true // Puedes volver a activar resend
+                    buttonActive = true
                 }
             }
             

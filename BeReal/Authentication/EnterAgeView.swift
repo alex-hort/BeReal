@@ -9,9 +9,12 @@ import SwiftUI
 
 struct EnterAgeView: View {
     
-    @State var month = ""
-    @State var day = ""
-    @State var year = ""
+    
+    
+    @Binding var year: Year
+    @Binding var name: String
+    
+    
     @State var buttonActive = false
     
     @Binding var ageButtonClicked: Bool
@@ -38,7 +41,7 @@ struct EnterAgeView: View {
                 }
                 
                 VStack(alignment: .center, spacing: 8) {
-                    Text("Hi, when's your birthay?")
+                    Text("Hi,\(name) when's your birthay?")
                         .foregroundStyle(.white)
                         .fontWeight(.heavy)
                         .font(.system(size: 16))
@@ -47,60 +50,60 @@ struct EnterAgeView: View {
                         
                         // ---------- MONTH ----------
                         ZStack {
-                            if month.isEmpty {
+                            if year.month.isEmpty {
                                 Text("MM")
                                     .foregroundStyle(Color(red: 70/255, green: 70/255, blue: 73/255))
                                     .font(.system(size: 40, weight: .heavy))
                             }
                             
-                            TextField("", text: $month)
+                            TextField("", text: $year.month)
                                 .foregroundStyle(.white)
                                 .font(.system(size: 45, weight: .heavy))
                                 .multilineTextAlignment(.center)
                                 .keyboardType(.numberPad)
-                                .onChange(of: month) {
-                                    month = month.filter { $0.isNumber }
-                                    if month.count > 2 { month = String(month.prefix(2)) }
+                                .onChange(of: year.month) {
+                                    year.month = year.month.filter { $0.isNumber }
+                                    if year.month.count > 2 { year.month = String(year.month.prefix(2)) }
                                 }
                         }
                         .frame(width: 72)
                         
                         // ---------- DAY ----------
                         ZStack {
-                            if day.isEmpty {
+                            if year.day.isEmpty {
                                 Text("DD")
                                     .foregroundStyle(Color(red: 70/255, green: 70/255, blue: 73/255))
                                     .font(.system(size: 40, weight: .heavy))
                             }
                             
-                            TextField("", text: $day)
+                            TextField("", text: $year.day)
                                 .foregroundStyle(.white)
                                 .font(.system(size: 45, weight: .heavy))
                                 .multilineTextAlignment(.center)
                                 .keyboardType(.numberPad)
-                                .onChange(of: day) {
-                                    day = year.filter { $0.isNumber }
-                                    if day.count > 2 { day = String(day.prefix(2)) }
+                                .onChange(of: year.day) {
+                                    year.day = year.day.filter { $0.isNumber }
+                                    if year.day.count > 2 { year.day = String(year.day.prefix(2)) }
                                 }
                         }
                         .frame(width: 72)
                         
                         // ---------- YEAR ----------
                         ZStack {
-                            if year.isEmpty {
+                            if year.year.isEmpty {
                                 Text("YYYY")
                                     .foregroundStyle(Color(red: 70/255, green: 70/255, blue: 73/255))
                                     .font(.system(size: 40, weight: .heavy))
                             }
                             
-                            TextField("", text: $year)
+                            TextField("", text: $year.year)
                                 .foregroundStyle(.white)
                                 .font(.system(size: 45, weight: .heavy))
                                 .multilineTextAlignment(.center)
                                 .keyboardType(.numberPad)
-                                .onChange(of: year) {
-                                    year = year.filter { $0.isNumber }
-                                    if year.count > 4 { year = String(year.prefix(4)) }
+                                .onChange(of: year.year) {
+                                    year.year = year.year.filter { $0.isNumber }
+                                    if year.year.count > 4 { year.year = String(year.year.prefix(4)) }
                                 }
                         }
                         .frame(width: 120)
@@ -124,7 +127,7 @@ struct EnterAgeView: View {
                     }label: {
                         WhiteButtonView(buttonActive: $ageButtonClicked, text: "Continue")
                             .padding(.bottom, 50)
-                            .onChange(of: month) { oldValue, newValue in
+                            .onChange(of: year.month) { oldValue, newValue in
                                 if !newValue.isEmpty{
                                     buttonActive = true
                                 } else if newValue.isEmpty{

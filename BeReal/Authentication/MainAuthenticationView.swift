@@ -18,11 +18,11 @@ struct MainAuthenticationView: View {
     var body: some View {
         NavigationView{
             if !nameButtonClicked{
-                EnternNameView(nameButtonClicked: $nameButtonClicked)
+                EnternNameView(name: $viewModel.name,nameButtonClicked: $nameButtonClicked)
                     .environmentObject(viewModel)
             }
             else if nameButtonClicked && !ageButtonClicked{
-                EnterAgeView(ageButtonClicked: $ageButtonClicked)
+                EnterAgeView(year: $viewModel.year, name: $viewModel.name,ageButtonClicked: $ageButtonClicked)
             }
             else if nameButtonClicked && ageButtonClicked && !phoneNumberClicked{
                 EnterPhoneNumberView( phoneNumeberButtonClicked: $phoneNumberClicked)
