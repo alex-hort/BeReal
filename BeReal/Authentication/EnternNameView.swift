@@ -11,6 +11,8 @@ struct EnternNameView: View {
     
     @State var name = ""
     @State var buttonActive = false
+    
+    @Binding var nameButtonClicked: Bool
     var body: some View {
         VStack{
             ZStack{
@@ -41,6 +43,12 @@ struct EnternNameView: View {
                             .font(.system(size: 40, weight: .heavy))
                             .multilineTextAlignment(.center)
                             .frame(width: 210)
+                            .overlay {
+                                TextField("", text: $name)
+                                    .font(.system(size: 40, weight: .heavy))
+                                    .multilineTextAlignment(.center)
+                                    .foregroundStyle(.white)
+                            }
                             
 
                         
@@ -58,10 +66,10 @@ struct EnternNameView: View {
                     }label: {
                         WhiteButtonView(buttonActive: $buttonActive , text: "Continue")
                         
-                            .onChange(of: name) { newValue in
-                                if !newValue.isEmpty{
+                            .onChange(of: name) {
+                                if !name.isEmpty{
                                     buttonActive = true
-                                } else if newValue.isEmpty{
+                                } else if name.isEmpty{
                                     buttonActive = false
                                 }
                             }
@@ -76,6 +84,6 @@ struct EnternNameView: View {
     }
 }
 
-#Preview {
-    EnternNameView()
-}
+//#Preview {
+//    EnternNameView()
+//}

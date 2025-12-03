@@ -12,9 +12,10 @@ struct EnterAgeView: View {
     @State var month = ""
     @State var day = ""
     @State var year = ""
-    
-    @State var ageButtonClicked = false
     @State var buttonActive = false
+    
+    @Binding var ageButtonClicked: Bool
+   
     
     var body: some View {
         VStack {
@@ -144,6 +145,3 @@ struct EnterAgeView: View {
 }
 
 
-#Preview {
-    EnterAgeView()
-}

@@ -15,6 +15,8 @@ struct EnterPhoneNumberView: View {
     @State var phoneNumber = ""
     @State var buttonActive = false
     
+    @Binding var phoneNumeberButtonClicked: Bool
+    
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
@@ -64,7 +66,20 @@ struct EnterPhoneNumberView: View {
                         .keyboardType(.numberPad)
                         .foregroundStyle(.white)
                         .font(.system(size: 40, weight: .heavy))
-                       
+                        .onChange(of: phoneNumber) {
+                            // 1. Eliminar todo lo que NO sea número
+                            let filtered = phoneNumber.filter { $0.isNumber }
+
+                            // 2. Limitar a 10 dígitos
+                            if filtered.count > 10 {
+                                phoneNumber = String(filtered.prefix(10))
+                            } else {
+                                phoneNumber = filtered
+                            }
+                        }
+
+                        
+                      
                         
                     }
                     .padding(.horizontal)
@@ -112,6 +127,3 @@ struct EnterPhoneNumberView: View {
 }
 
 
-#Preview {
-    EnterPhoneNumberView()
-}
