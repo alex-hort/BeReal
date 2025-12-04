@@ -33,6 +33,11 @@ class AuthenticationVM: ObservableObject {
     
     static let shared = AuthenticationVM()
     
+    init() {
+        userSession = Auth.auth().currentUser
+        fetchUser()
+    }
+    
     func sendfOtp() async {
         guard !isLoading else { return }
         
@@ -92,5 +97,26 @@ class AuthenticationVM: ObservableObject {
             handleError(error: error
                 .localizedDescription)
         }
+    }
+    
+    func signOut(){
+        self.userSession = nil
+        try? Auth.auth().signOut()
+    }
+    
+    
+    func fetchUser(){
+        guard let uid = userSession?.uid else {return}
+        
+        Firestore.firestore().collection("users").document(uid).getDocument(){ snapshot, err in
+            if let err = err {
+                print(err.localizedDescription)
+                return
+            }
+            guard let user = try? snapshot?.data(as: User.self) else {return}
+            self.currentUser
+            
+        }
+        
     }
 }
