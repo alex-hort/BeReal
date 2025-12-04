@@ -14,36 +14,31 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
         FirebaseApp.configure()
-        print("Firebase configurado correctamente")
-        
         // CRÍTICO: Deshabilitar verificación de app para desarrollo/testing
-        #if DEBUG
+#if DEBUG
         Auth.auth().settings?.isAppVerificationDisabledForTesting = true
-        print(" Verificación de app deshabilitada para testing")
-        #endif
+#endif
         
         return true
     }
     
     // Maneja el URL callback de reCAPTCHA
     func application(_ app: UIApplication,
-                    open url: URL,
-                    options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+                     open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         if Auth.auth().canHandle(url) {
-            print(" Firebase Auth manejó el URL")
             return true
         }
-        print("URL no manejado por Firebase: \(url)")
         return false
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         if Auth.auth().canHandleNotification(userInfo) {
-             completionHandler(.noData)
-             return
-         }
-
-         completionHandler(.noData)
+            completionHandler(.noData)
+            return
+        }
+        
+        completionHandler(.noData)
     }
 }
 
@@ -54,7 +49,7 @@ struct BeRealApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainAuthenticationView()
+            MainView().environmentObject(AuthenticationVM.shared)
         }
     }
 }

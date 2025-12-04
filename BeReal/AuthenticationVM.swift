@@ -9,6 +9,8 @@ import Foundation
 import CountryPicker
 import FirebaseAuth
 import FirebaseCore
+import FirebaseFirestore
+
 
 @MainActor
 class AuthenticationVM: ObservableObject {
@@ -25,6 +27,11 @@ class AuthenticationVM: ObservableObject {
     @Published var verificationCode: String = ""
     @Published var errorMenssage = ""
     @Published var showAlert = false
+    
+    @Published var userSession: FirebaseAuth.User?
+    @Published var currentUser: User?
+    
+    static let shared = AuthenticationVM()
     
     func sendfOtp() async {
         guard !isLoading else { return }
@@ -61,9 +68,25 @@ class AuthenticationVM: ObservableObject {
             
             let result = try await Auth.auth().signIn(with: credential)
             
+            let db = Firestore.firestore()
+            db.collection("users").document(result.user.uid).setData([
+                "fullname" : name,
+                "date" : year.date,
+                "id": result.user.uid
+            ]){
+                err in
+                
+                if let err = err {
+                    print(err.localizedDescription)
+                }
+            }
+            
             self.isLoading = false
             let user = result.user
+            self.userSession = user
             print(user.uid)
+            
+            
         } catch{
             print("Error")
             handleError(error: error
