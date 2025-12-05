@@ -89,6 +89,7 @@ class AuthenticationVM: ObservableObject {
             self.isLoading = false
             let user = result.user
             self.userSession = user
+            self.currentUser = User(name: name, date: year.date)
             print(user.uid)
             
             

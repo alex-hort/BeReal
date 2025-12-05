@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import CountryPicker
 
 struct EnterCodeView: View {
 
@@ -38,7 +39,7 @@ struct EnterCodeView: View {
                     VStack{
                         VStack(alignment: .center, spacing: 8){
                             
-                            Text("Enter the code we sent to + 56 58 78 46 44")
+                            Text("Enter the code we sent to +\(aVM.country.isoCode.getFlag()) \(aVM.phoneNumber)")
                                 .foregroundStyle(.white)
                                 .fontWeight(.medium)
                                 .font(.system(size: 16))

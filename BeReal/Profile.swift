@@ -10,6 +10,8 @@ import SwiftUI
 struct Profile: View {
     @Binding var mainMenu: String
     
+    @EnvironmentObject var viewModel: AuthenticationVM
+    
     var body: some View {
         
         VStack{
@@ -51,11 +53,24 @@ struct Profile: View {
                 }
                 
                 VStack{
-                    Image("me")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 130, height: 130)
-                        .cornerRadius(75)
+                    Circle()
+                        .frame(width: 35, height: 35)
+                        .cornerRadius(17.5)
+                        .foregroundStyle(Color(red: 152/255, green: 163/255, blue: 16/255))
+                        .overlay {
+                           
+                            if let user = viewModel.currentUser{
+                                Text(user.name.prefix(1).uppercased())
+                                    .foregroundStyle(.white)
+                                    .font(.system(size: 15))
+                            } else {
+                                ProgressView()
+                            }
+                           
+                        }
+                    
+                    
+                    
                     Text("Ale")
                         .foregroundStyle(.white)
                         .font(.system(size: 25))

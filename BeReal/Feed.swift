@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct Feed: View {
     
     @Binding var mainMenu: String
+    
+    @EnvironmentObject var viewModel: AuthenticationVM
     
     var body: some View {
         ZStack{
@@ -97,10 +100,27 @@ struct Feed: View {
                                     self.mainMenu = "profile"
                                 }
                             }label: {
-                                Image("me")
-                                    .resizable()
+                                Circle()
                                     .frame(width: 35, height: 35)
-                                    .clipShape(Circle())
+                                    .cornerRadius(17.5)
+                                    .foregroundStyle(Color(red: 152/255, green: 163/255, blue: 16/255))
+                                    .overlay {
+                                       
+                                        if let user = viewModel.currentUser{
+                                            Text(user.name.prefix(1).uppercased())
+                                                .foregroundStyle(.white)
+                                                .font(.system(size: 15))
+                                        } else {
+                                            ProgressView()
+                                        }
+                                       
+                                    }
+                                
+                                
+//                                Image("me")
+//                                    .resizable()
+//                                    .frame(width: 35, height: 35)
+//
                             }
                         }
                         .padding(.horizontal)

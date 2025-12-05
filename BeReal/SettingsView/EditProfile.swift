@@ -8,49 +8,56 @@
 import SwiftUI
 
 struct EditProfile: View {
-    @State private var fullname = ""
-    @State private var username = ""
-    @State private var bio = ""
-    @State private var location = ""
+    @State private var fullname: String = ""
+    @State private var username: String = ""
+    @State private var bio: String = ""
+    @State private var location: String = ""
+    @EnvironmentObject var viewModel: AuthenticationVM
+    @Environment(\.dismiss) var dismiss
     
-    
-    
+  
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
-            
-            VStack(spacing: 0) {
-                HeaderView()
-                
-                ScrollView {
-                    VStack(spacing: 24) {
-                        ProfileImageSection()
                         
                         VStack(spacing: 0) {
-                            ProfileFieldRow(
-                                label: "Full Name",
-                                text: $fullname,
-                                placeholder: "Alexis Horteales Espinosa"
-                            )
+                            HeaderView()
                             
-                            ProfileFieldRow(
-                                label: "Username",
-                                text: $username,
-                                placeholder: "alex-hort"
-                            )
+                            ScrollView {
+                                VStack(spacing: 24) {
+                                    ProfileImageSection()
+                                    
+                                    VStack(spacing: 0) {
+                                        ProfileFieldRow(
+                                            label: "Name",
+                                            text: $fullname,
+                                            placeholder: viewModel.currentUser!.name
+                                        )
+                                        
+                                        ProfileFieldRow(
+                                            label: "Username",
+                                            text: $username,
+                                            placeholder: viewModel.currentUser!.username ?? "alex-hort"
+                                        )
+                                        
+                                        BioFieldRow(
+                                            text: $bio,
+                                            placeholder: viewModel.currentUser!.bio ?? "Bio"
+                                        )
+                                        
+                                        ProfileFieldRow(
+                                            label: "Location",
+                                            text: $location,
+                                            placeholder: viewModel.currentUser!.location ?? "Location",
+                                            fontSize: 12
+                                        )
+                                    }
+                                }
+                                .padding(.horizontal, 20)
+                                .padding(.top, 24)
                             
-                            BioFieldRow(text: $bio)
-                            
-                            ProfileFieldRow(
-                                label: "Location",
-                                text: $location,
-                                placeholder: "Location",
-                                fontSize: 12
-                            )
-                        }
-                    }
-                    .padding(.horizontal, 20)
-                    .padding(.top, 24)
+                        
+                  
                 }
             }
         }
@@ -59,7 +66,20 @@ struct EditProfile: View {
 
 // MARK: - Header
 struct HeaderView: View {
+    @EnvironmentObject var viewModel: AuthenticationVM
     @Environment(\.dismiss) var dismiss
+    @State private var fullname: String = ""
+    @State private var username: String = ""
+    @State private var bio: String = ""
+    @State private var location: String = ""
+    
+    private func saveData(){
+        if viewModel.currentUser!.name != self.fullname && self.fullname.isEmpty{
+            viewModel.currentUser!.name = self.fullname
+        }
+    }
+    
+    
     var body: some View {
         VStack(spacing: 0) {
             ZStack {
@@ -71,8 +91,14 @@ struct HeaderView: View {
                     
                     Spacer()
                     
-                    Button("Save") {}
-                        .foregroundStyle(.gray)
+                    Button {
+                        saveData()
+                        dismiss()
+                    }label:{
+                       Text("Save")
+                            .foregroundStyle(.gray)
+                    }
+                        
                 }
                 .padding(.horizontal, 20)
                 
@@ -91,13 +117,24 @@ struct HeaderView: View {
 
 // MARK: - Profile Image Section
 struct ProfileImageSection: View {
+    @EnvironmentObject var viewModel: AuthenticationVM
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            Image("me")
-                .resizable()
-                .scaledToFill()
-                .frame(width: 120, height: 120)
-                .clipShape(Circle())
+            Circle()
+                .frame(width: 35, height: 35)
+                .cornerRadius(17.5)
+                .foregroundStyle(Color(red: 152/255, green: 163/255, blue: 16/255))
+                .overlay {
+                   
+                    if let user = viewModel.currentUser{
+                        Text(user.name.prefix(1).uppercased())
+                            .foregroundStyle(.white)
+                            .font(.system(size: 15))
+                    } else {
+                        ProgressView()
+                    }
+                   
+                }
             
             CameraButton()
         }
@@ -127,7 +164,8 @@ struct CameraButton: View {
     }
 }
 
-// MARK: - Profile Field Row
+
+
 struct ProfileFieldRow: View {
     let label: String
     @Binding var text: String
@@ -156,10 +194,9 @@ struct ProfileFieldRow: View {
         }
     }
 }
-
-// MARK: - Bio Field Row
 struct BioFieldRow: View {
     @Binding var text: String
+    let placeholder: String
     
     var body: some View {
         VStack(spacing: 0) {
@@ -175,7 +212,7 @@ struct BioFieldRow: View {
                 
                 ZStack(alignment: .topLeading) {
                     if text.isEmpty {
-                        Text("Bio")
+                        Text(placeholder)
                             .foregroundStyle(.gray)
                             .font(.system(size: 16))
                             .padding(.top, 8)
@@ -195,6 +232,4 @@ struct BioFieldRow: View {
 
 
 
-#Preview {
-    EditProfile()
-}
+

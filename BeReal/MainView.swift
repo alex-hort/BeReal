@@ -11,16 +11,15 @@ struct MainView: View {
     
     @EnvironmentObject var viewModel: AuthenticationVM
     
-    
-    
-    
     var body: some View {
         Group{
             if viewModel.userSession == nil {
                 MainAuthenticationView()
             }
             else {
-                ContentView()
+                if let user = viewModel.currentUser{
+                    ContentView()
+                }
             }
         }
     }

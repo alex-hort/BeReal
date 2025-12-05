@@ -11,6 +11,7 @@ struct Settings: View {
     @State var width = UIScreen.main.bounds.width
     
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var viewModel: AuthenticationVM
     
     var body: some View {
         NavigationView {
@@ -42,7 +43,7 @@ struct Settings: View {
                     
                     VStack{
                         NavigationLink {
-                           EditProfile()
+                            EditProfile().navigationBarBackButtonHidden()
                                 .navigationBarBackButtonHidden()
                         } label: {
                             RoundedRectangle(cornerRadius: 16)
@@ -51,11 +52,25 @@ struct Settings: View {
                                 .opacity(0.07)
                                 .overlay {
                                     HStack{
-                                        Image("me")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 60, height: 60)
-                                            .cornerRadius(30)
+                                      
+                                        Circle()
+                                            .frame(width: 35, height: 35)
+                                            .cornerRadius(17.5)
+                                            .foregroundStyle(Color(red: 152/255, green: 163/255, blue: 16/255))
+                                            .overlay {
+                                               
+                                                if let user = viewModel.currentUser{
+                                                    Text(user.name.prefix(1).uppercased())
+                                                        .foregroundStyle(.white)
+                                                        .font(.system(size: 15))
+                                                } else {
+                                                    ProgressView()
+                                                }
+                                               
+                                            }
+                                        
+                                        
+                                        
                                         
                                         VStack(alignment: .leading){
                                             Text("Ale")
@@ -392,11 +407,8 @@ struct Settings: View {
             }
         }
     }
+    
 }
         
         
     
-
-#Preview {
-    Settings()
-}

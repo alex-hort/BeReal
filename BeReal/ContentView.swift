@@ -13,7 +13,7 @@ struct ContentView: View {
     @State var menu = "feed"
     
     
-    
+    @EnvironmentObject var viewModel: AuthenticationVM
     init(){
         UITextView.appearance().backgroundColor = .clear
     }
